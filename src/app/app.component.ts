@@ -15,7 +15,7 @@ export class AppComponent extends BaseComponent {
   render() {
     return html`
       <app-header brandname="Placeholder" pages="Home,About"></app-header>
-      <h1>Hello, World!</h1>
+      <h1>Smash the JELLY!!!!</h1>
     `
   }
 }
