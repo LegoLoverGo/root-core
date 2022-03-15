@@ -31,3 +31,15 @@ export function Component(options: ComponentOptions) {
     target.selector = options.selector;
   };
 }
+
+export function Property(
+  target: ComponentClass,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) {
+  const name = descriptor.value();
+
+  descriptor.value = function (this: ComponentClass) {
+    this.getAttribute(name);
+  };
+}

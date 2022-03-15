@@ -1,10 +1,11 @@
 import { BaseModule, css, Module } from '../core';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header.component';
 
 @Module({
   bootstrap: AppComponent,
-  components: [AppComponent],
+  components: [AppComponent, HeaderComponent],
   globalStyle: css`
     @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
