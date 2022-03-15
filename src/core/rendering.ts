@@ -17,7 +17,13 @@ export function Mount(module: ModuleClass, element: Element) {
         super();
 
         const template = document.createElement('template');
-        template.innerHTML = this.render();
+        template.innerHTML =
+          html`
+          <style>
+            ${module.globalStyle}
+            ${this.styles}
+          </style>
+        ` + this.render();
 
         this.attachShadow({ mode: 'open' });
         this.shadowRoot!.appendChild(template.content);
