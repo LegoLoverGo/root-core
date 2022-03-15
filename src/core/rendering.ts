@@ -12,6 +12,10 @@ export function Mount(module: ModuleClass, element: Element) {
   module.components.forEach((component) => {
     const selector = component.selector!;
 
+    const styleElement = document.createElement('style');
+    styleElement.innerText = module.globalStyle;
+    document.head.appendChild(styleElement);
+
     class CustomElement extends component {
       constructor() {
         super();
