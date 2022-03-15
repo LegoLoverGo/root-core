@@ -17,11 +17,19 @@ export function Mount(module: ModuleClass, element: Element) {
     document.head.appendChild(styleElement);
 
     class CustomElement extends component {
+      template: HTMLTemplateElement;
+
       constructor() {
         super();
 
-        const template = document.createElement('template');
-        template.innerHTML =
+        this.attachShadow({ mode: 'open' });
+
+        this.template = document.createElement('template');
+        this.attributeChangedCallback();
+      }
+
+      attributeChangedCallback() {
+        this.template.innerHTML =
           html`
           <style>
             ${module.globalStyle}
@@ -29,8 +37,8 @@ export function Mount(module: ModuleClass, element: Element) {
           </style>
         ` + this.render();
 
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot!.appendChild(template.content);
+        this.shadowRoot!.innerHTML = '';
+        this.shadowRoot!.appendChild(this.template.content);
       }
     }
 
