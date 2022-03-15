@@ -1,20 +1,31 @@
 import { ModuleClass } from './modules'
 
-export function html(strings: TemplateStringsArray, ...args: string[]) {
+export function html(
+  strings: TemplateStringsArray,
+  ...args: (string | string[])[]
+) {
+  const newArgs = args.map((arg) => {
+    if (typeof arg == 'string') return arg
+    return arg.join('')
+  })
+
   return strings
-    .map((string, index) => (index == 0 ? string : args[index - 1] + string))
+    .map((string, index) => {
+      if (index == 0) return string
+      return newArgs[index - 1] + string
+    })
     .join('')
 }
 
 export { html as css }
 
 export function Mount(module: ModuleClass, element: Element) {
+  const styleElement = document.createElement('style')
+  styleElement.textContent = module.globalStyle
+  document.head.appendChild(styleElement)
+
   module.components.forEach((component) => {
     const selector = component.selector!
-
-    const styleElement = document.createElement('style')
-    styleElement.innerText = module.globalStyle
-    document.head.appendChild(styleElement)
 
     class CustomElement extends component {
       template: HTMLTemplateElement
