@@ -1,35 +1,35 @@
 interface ComponentOptions {
-  selector: string;
+  selector: string
 }
 
 export interface ComponentClass extends HTMLElement {
-  _internal?: ComponentOptions;
+  _internal?: ComponentOptions
 
-  styles: string;
-  render: () => string;
+  styles: string
+  render: () => string
 }
 
 export class BaseComponent extends HTMLElement implements ComponentClass {
-  _internal?: ComponentOptions;
+  _internal?: ComponentOptions
 
-  styles = '';
+  styles = ''
   render() {
-    const selector = this._internal!.selector;
-    throw new Error(`${selector}#render() not defined`);
-    return '';
+    const selector = this._internal!.selector
+    throw new Error(`${selector}#render() not defined`)
+    return ''
   }
 }
 
 export interface ComponentPrototype {
-  new (): ComponentClass;
-  selector?: string;
+  new (): ComponentClass
+  selector?: string
 }
 
 export function Component(options: ComponentOptions) {
   return function (target: ComponentPrototype) {
-    target.prototype._internal = options;
-    target.selector = options.selector;
-  };
+    target.prototype._internal = options
+    target.selector = options.selector
+  }
 }
 
 export function Property(
@@ -37,9 +37,9 @@ export function Property(
   propertyKey: string,
   descriptor: PropertyDescriptor
 ) {
-  const name = descriptor.value();
+  const name = descriptor.value()
 
   descriptor.value = function (this: ComponentClass) {
-    return this.getAttribute(name);
-  };
+    return this.getAttribute(name)
+  }
 }

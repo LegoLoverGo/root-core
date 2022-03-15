@@ -1,7 +1,7 @@
-import { BaseModule, css, Module } from '../core';
+import { BaseModule, css, Module } from '../core'
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header.component';
+import { AppComponent } from './app.component'
+import { HeaderComponent } from './header.component'
 
 @Module({
   bootstrap: AppComponent,
@@ -10,7 +10,7 @@ import { HeaderComponent } from './header.component';
     @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
     :root {
-      --primary: #4CC4C1;
+      --primary: #4cc4c1;
     }
 
     * {

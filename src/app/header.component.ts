@@ -1,4 +1,4 @@
-import { BaseComponent, Component, html, Property } from '../core';
+import { BaseComponent, Component, html, Property } from '../core'
 
 @Component({
   selector: 'app-header',
@@ -6,12 +6,10 @@ import { BaseComponent, Component, html, Property } from '../core';
 export class HeaderComponent extends BaseComponent {
   @Property
   brandname() {
-    return 'brandname';
+    return 'brandname'
   }
 
   render() {
-    return html`
-      ${this.brandname()}
-    `;
+    return html` ${this.brandname()} `
   }
 }
