@@ -40,6 +40,6 @@ export function Property(
   const name = descriptor.value();
 
   descriptor.value = function (this: ComponentClass) {
-    this.getAttribute(name);
+    return this.getAttribute(name);
   };
 }
