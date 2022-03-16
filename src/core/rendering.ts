@@ -1,5 +1,4 @@
 import { ModuleClass } from './modules'
-import { CoreElement } from './react'
 
 export function html(
   strings: TemplateStringsArray,
@@ -19,21 +18,6 @@ export function html(
 }
 
 export { html as css }
-
-function renderCoreElement(element: CoreElement): string {
-  const children = element.props
-    .children!.map((child) => renderCoreElement(child))
-    .join('')
-
-  let props: string[] = []
-  for (const prop in element.props) {
-    if (typeof prop != 'string') {
-      props.push(`${prop}="${JSON.stringify(element.props[prop])}"`)
-    }
-  }
-
-  return `<${element.type} ${props.join(' ')}></${element.type}>`
-}
 
 export function Mount(module: ModuleClass, element: Element) {
   const styleElement = document.createElement('style')
@@ -62,7 +46,7 @@ export function Mount(module: ModuleClass, element: Element) {
               ${module.globalStyle}
               ${this.styles}
             </style>
-          ` + renderCoreElement(this.render())
+          ` + this.render()
 
         this.shadowRoot!.innerHTML = ''
         this.shadowRoot!.appendChild(this.template.content)

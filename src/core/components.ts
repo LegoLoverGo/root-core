@@ -1,5 +1,3 @@
-import { createElement, CoreElement } from './index'
-
 interface ComponentOptions {
   selector: string
 }
@@ -8,7 +6,7 @@ export interface ComponentClass extends HTMLElement {
   _internal?: ComponentOptions
 
   styles: string
-  render: () => CoreElement
+  render: () => string
 }
 
 export class BaseComponent extends HTMLElement implements ComponentClass {
@@ -18,7 +16,7 @@ export class BaseComponent extends HTMLElement implements ComponentClass {
   render() {
     const selector = this._internal!.selector
     throw new Error(`${selector}#render() not defined`)
-    return <div>Hello, World!</div>
+    return ''
   }
 }
 
